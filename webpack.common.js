@@ -37,14 +37,14 @@ const config = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, "src", "img"),
-    //       to: path.resolve(__dirname, "dist", "img"),
-    //     },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "img"),
+          to: path.resolve(__dirname, "dist", "img"),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
