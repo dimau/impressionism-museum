@@ -1,0 +1,40 @@
+@use "shared";
+
+.bonuses {
+  @extend %section;
+}
+
+.bonuses__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bonuses__header {
+  @include shared.header(2);
+}
+
+.bonuses__list {
+
+}
+
+.bonuses__bonus-card {
+  display: flex;
+  flex-direction: column;
+  background: shared.$ui-gradient-red;
+  border-radius: 32px;
+}
+
+.bonus-card__img {
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+.bonus-card__desc {
+  padding: 20px 32px 0;
+  height: 130px;
+}
+
+.bonus-card__header {
+  @include shared.header(5);
+}

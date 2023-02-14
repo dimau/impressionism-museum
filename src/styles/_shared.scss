@@ -30,8 +30,12 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
     font-size: 60px;
   } @else if ($size == 2) {
     font-size: 44px;
-  } @else {
+  } @else if ($size == 3) {
     font-size: 36px;
+  } @else if ($size == 4) {
+    font-size: 32px;
+  } @else {
+    font-size: 24px;
   }
 
   @media all and (width >= 768px) {
@@ -76,7 +80,7 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
 }
 
 %section {
-  margin: 0 16px;
+  margin: 0 16px 120px 16px;
   max-width: 1520px;
 
   @media all and (width >= 768px) {

@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,600&display=swap');
 
 body {
+  @include shared.text-body("m");
   overflow-x: hidden;
 }
+
+
 
