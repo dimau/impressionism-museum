@@ -1,0 +1,77 @@
+// Colors
+$text-primary-color: #221F1F;
+$text-secondary-color: #5C5C5C;
+$text-inverted-color: #FFFFFF;
+$text-placeholder-color: #767676;
+$text-accent-red-color: #A10067;
+$text-accent-green-color: #009946;
+$background-color: #FFFFFF;
+$ui-primary-color: #FFFFFF;
+$ui-neutral-color: #F4F5F5;
+$ui-inverted-color: #221F1F;
+$ui-border-color: #939393;
+$ui-accent-blue-color: #39A6C8;
+$ui-accent-red-color: #CA000F;
+$ui-accent-dark-red-color: #A10067;
+$ui-gradient-yellow: radial-gradient(138.26% 121.33% at 50% 115.89%, #B7FF80 0%, #EAFF7D 56.6%, #FFF88A 100%);
+$ui-gradient-yellow-short: radial-gradient(138.26% 121.33% at 50% 115.89%, #B7FF80 0%, #EAFF7D 43.54%, #FFF88A 100%);
+$ui-gradient-green: radial-gradient(127.88% 112.22% at 50% -12.22%, #AAF8FD 0%, #E6FFCC 100%);
+$ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FFF7B1 100%);
+
+// Fonts
+@mixin header($size) {
+  font-family: 'Roboto Flex', sans-serif;
+  color: $text-primary-color;
+  line-height: 1.1;
+  font-weight: 600;
+  font-style: normal;
+
+  @if ($size == 1) {
+    font-size: 60px;
+  } @else if ($size == 2) {
+    font-size: 44px;
+  } @else {
+    font-size: 36px;
+  }
+
+  @media all and (width >= 768px) {
+    @if ($size == 1) {
+      font-size: 80px;
+      line-height: 1;
+    } @else if ($size == 2) {
+      font-size: 60px;
+    } @else if ($size == 3) {
+      font-size: 40px;
+    } @else if ($size == 4) {
+      font-size: 32px;
+    } @else {
+      font-size: 24px;
+      line-height: 1.2;
+    }
+  }
+}
+
+@mixin text-body($size) {
+  font-family: 'Inter', sans-serif;
+  color: $text-primary-color;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+
+  @if ($size == "normal") {
+    font-size: 18px;
+  } @else {
+    font-size: 16px;
+  }
+}
+
+@mixin button($type) {
+  @if ($type == "primary") {
+    font-size: 18px;
+    font-weight: 500;
+  } @else {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
