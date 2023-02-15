@@ -3,10 +3,41 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,600&display=swap');
 
+:root {
+  --section-margin-side: 16px; /* responsive margin for left and right sides of each section on the site */
+}
+
+@media all and (width >= 768px) {
+  :root {
+    --section-margin-side: 3vw;
+  }
+}
+
+@media all and (width >= 1024px) {
+  :root {
+    --section-margin-side: 4.7vw;
+  }
+}
+
+@media all and (width >= 1440px) {
+  :root {
+    --section-margin-side: 8.3vw;
+  }
+}
+
+@media all and (width >= 1920px) {
+  :root {
+    --section-margin-side: calc((100% - 1520px) / 2);
+  }
+}
+
 body {
   @include shared.text-body("m");
   overflow-x: hidden;
 }
 
-
-
+.container {
+  margin-left: var(--section-margin-side);
+  margin-right: var(--section-margin-side);
+  max-width: 1520px;
+}

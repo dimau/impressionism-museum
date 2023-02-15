@@ -15,24 +15,41 @@
 }
 
 .bonuses__list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 12px;
+  scroll-snap-type: x mandatory;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .bonuses__bonus-card {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   background: shared.$ui-gradient-red;
   border-radius: 32px;
+  width: 314px;
+  scroll-snap-align: start;
+}
+
+.bonuses__list::before,
+.bonuses__list::after {
+  content: "";
+  flex: 0 0 calc(var(--section-margin-side) - 12px);
+  scroll-snap-align: start;
 }
 
 .bonus-card__img {
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
+  border-radius: 32px;
 }
 
 .bonus-card__desc {
-  padding: 20px 32px 0;
-  height: 130px;
+  padding: 20px 32px;
 }
 
 .bonus-card__header {

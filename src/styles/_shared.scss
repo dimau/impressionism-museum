@@ -80,22 +80,5 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
 }
 
 %section {
-  margin: 0 16px 120px 16px;
-  max-width: 1520px;
-
-  @media all and (width >= 768px) {
-    margin: 0 3vw;
-  }
-  
-  @media all and (width >= 1024px) {
-    margin: 0 4.7vw;
-  }
-  
-  @media all and (width >= 1440px) {
-    margin: 0 8.3vw;
-  }
-
-  @media all and (width >= 1920px) {
-    margin: 0 auto;
-  }
+  margin-bottom: 120px;
 }
