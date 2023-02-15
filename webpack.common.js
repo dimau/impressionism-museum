@@ -45,6 +45,14 @@ const config = {
         },
       ],
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "robots.txt"),
+          to: path.resolve(__dirname, "dist", "robots.txt"),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
