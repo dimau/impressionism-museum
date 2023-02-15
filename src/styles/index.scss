@@ -5,6 +5,7 @@
 
 :root {
   --section-margin-side: 16px; /* responsive margin for left and right sides of each section on the site */
+  --site-content-max-width: 1520px;
 }
 
 @media all and (width >= 768px) {
@@ -27,7 +28,7 @@
 
 @media all and (width >= 1920px) {
   :root {
-    --section-margin-side: calc((100% - 1520px) / 2);
+    --section-margin-side: calc((100% - var(--site-content-max-width)) / 2);
   }
 }
 
@@ -39,5 +40,4 @@ body {
 .container {
   margin-left: var(--section-margin-side);
   margin-right: var(--section-margin-side);
-  max-width: 1520px;
 }
