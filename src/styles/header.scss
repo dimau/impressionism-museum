@@ -1,7 +1,7 @@
 @use "shared";
 
 .header {
-  @extend %section;
+  margin-bottom: 28px;
   padding-top: 12px;
 }
 
@@ -47,7 +47,7 @@
   align-self: flex-start;
 }
 
-@media all and (width >= 1024px) {
+@media (min-width: 1024px) {
   .nav__logo {
     width: 180px;
     height: 80px;

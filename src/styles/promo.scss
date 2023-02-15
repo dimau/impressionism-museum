@@ -1,17 +1,28 @@
 @use "shared";
 
 .promo {
-  @extend %section;
+  margin-bottom: var(--section-margin-bottom);
 }
 
 .promo__inner {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas: "header"
                        "img"
-                       "call-to-action";
-  gap: 16px;
+                       "call-to-action"
+                       "button";
+  gap: 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 40% 60%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "header img"
+                         "call-to-action img"
+                         "button img";
+    align-items: flex-start;
+    min-width: 1200px;
+  }
 }
 
 .promo__header {
@@ -19,16 +30,84 @@
   @include shared.header(1);
 }
 
-.promo__img {
+.promo__picture-wrapper {
   grid-area: img;
+  justify-self: center;
+
+  @media (min-width: 768px) {
+    justify-self: flex-end;
+  }
+}
+
+.promo__picture {
+  position: relative;
+
+  &::before {
+    @extend %tag;
+    content: "Новые знакомства";
+    color: shared.$text-accent-red-color;
+    position: absolute;
+    top: -18px;
+    left: -31px;
+    background: radial-gradient(104.77% 949.59% at 4.72% 2.44%, #FFA8B2 0%, #FFF7B1 100%);
+    transform: rotate(-20deg);
+    
+    @media (min-width: 768px) {
+      left: -63px;
+    }
+  }
+
+  &::after {
+    @extend %tag;
+    content: "Погружение в искусство";
+    color: shared.$text-accent-green-color;
+    position: absolute;
+    bottom: -4px;
+    right: -38px;
+    background: radial-gradient(92.92% 1244.4% at 2.28% 6.76%, #97FDFF 0%, #DFFED0 100%);
+    transform: rotate(10deg);
+
+    @media (min-width: 768px) {
+      right: 410px;
+    }
+    
+    @media (min-width: 1024px) {
+      right: 175px;
+    }
+
+    @media (min-width: 1251px) {
+      right: -38px;
+    }
+  }
+}
+
+.promo__img {
   border-radius: 40px;
+  margin-top: 72px;
+  margin-bottom: 50px;
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .promo__call-to-action {
   grid-area: call-to-action;
+  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 32px;
+    margin-bottom: 50px;
+  }
 }
 
 .promo__avatars {
@@ -37,4 +116,13 @@
 
 .promo__text {
   @include shared.text-body("s");
+  max-width: 378px;
+}
+
+.promo__button {
+  grid-area: button;
+
+  @media (min-width: 360px) {
+    justify-self: flex-start;
+  }
 }

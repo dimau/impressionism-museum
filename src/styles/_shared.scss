@@ -23,7 +23,7 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
   font-family: 'Roboto Flex', sans-serif;
   color: $text-primary-color;
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: 500;
   font-style: normal;
 
   @if ($size == 1) {
@@ -38,7 +38,7 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
     font-size: 24px;
   }
 
-  @media all and (width >= 768px) {
+  @media (min-width: 768px) {
     @if ($size == 1) {
       font-size: 80px;
       line-height: 1;
@@ -69,6 +69,18 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
   }
 }
 
+%tag {
+  font-weight: 500;
+  font-size: 16px;
+  padding: 16px 32px;
+  border-radius: 20px;
+
+  @media (min-width: 1024px) {
+    padding: 32px 48px;
+    font-size: 20px;
+  }
+}
+
 @mixin button($type) {
   @if ($type == "primary") {
     font-size: 18px;
@@ -77,8 +89,4 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
     font-size: 16px;
     font-weight: 400;
   }
-}
-
-%section {
-  margin-bottom: 120px;
 }

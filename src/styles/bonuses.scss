@@ -1,7 +1,7 @@
 @use "shared";
 
 .bonuses {
-  @extend %section;
+  margin-bottom: var(--section-margin-bottom);
 }
 
 .bonuses__inner {

@@ -33,14 +33,20 @@
                 <h1 class="promo__header">
                     Ищем волонтёров с любовью к искусству
                 </h1>
-                <img src="img/promo/promo.jpg" alt="Здание музея" class="promo__img">
+                <div class="promo__picture-wrapper">
+                    <picture class="promo__picture">
+                        <source media="(min-width: 768px)" srcset="img/promo/promo-full.jpg" class="promo__img">
+                        <source media="(min-width: 360px)" srcset="img/promo/promo-768.jpg" class="promo__img">
+                        <img src="img/promo/promo-360.jpg" alt="Здание музея" class="promo__img">
+                    </picture>
+                </div>
                 <div class="promo__call-to-action">
                     <img src="img/promo/avatars.png" alt="Фотографии участников" class="promo__avatars">
                     <div class="promo__text">
                         Стань частью команды Музея русского импрессионизма в Москве
                     </div>
-                    <a href="#" class="promo__button primary-button">Присоединиться</a>
                 </div>
+                <a href="#" class="promo__button primary-button">Присоединиться</a>
             </div>
         </div>
     </section>

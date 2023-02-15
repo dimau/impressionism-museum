@@ -1,32 +1,31 @@
 @use "shared";
 
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Flex:opsz,wght@8..144,600&display=swap');
 
 :root {
-  --section-margin-side: 16px; /* responsive margin for left and right sides of each section on the site */
   --site-content-max-width: 1520px;
+  --section-margin-side: 16px; /* responsive margin for left and right sides of each section on the site */
+  --section-margin-bottom: 120px;
 }
 
-@media all and (width >= 768px) {
+@media (min-width: 768px) {
   :root {
     --section-margin-side: 3vw;
   }
 }
 
-@media all and (width >= 1024px) {
+@media (min-width: 1024px) {
   :root {
     --section-margin-side: 4.7vw;
   }
 }
 
-@media all and (width >= 1440px) {
+@media (min-width: 1440px) {
   :root {
     --section-margin-side: 8.3vw;
   }
 }
 
-@media all and (width >= 1920px) {
+@media (min-width: 1920px) {
   :root {
     --section-margin-side: calc((100% - var(--site-content-max-width)) / 2);
   }
