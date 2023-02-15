@@ -12,12 +12,24 @@
   grid-template-rows: auto auto;
   grid-template-areas: "logo button"
                        "nav nav";
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 180px 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas: "logo nav button";
+    gap: 16px 64px;
+  }
 }
 
 .nav__logo {
   grid-area: logo;
   width: 111px;
   height: 50px;
+
+  @media (min-width: 1024px) {
+    width: 180px;
+    height: 80px;
+  }
 }
 
 .nav__list {
@@ -45,18 +57,4 @@
   grid-area: button;
   justify-self: right;
   align-self: flex-start;
-}
-
-@media (min-width: 1024px) {
-  .nav__logo {
-    width: 180px;
-    height: 80px;
-  }
-
-  .nav {
-    grid-template-columns: 180px 1fr auto;
-    grid-template-rows: auto;
-    grid-template-areas: "logo nav button";
-    gap: 16px 64px;
-  }
 }

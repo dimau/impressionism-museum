@@ -12,16 +12,23 @@
 
 .bonuses__header {
   @include shared.header(2);
+  margin-left: var(--section-margin-side);
+  margin-right: var(--section-margin-side);
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 }
 
 .bonuses__list {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  scrollbar-width: none;
   gap: 12px;
   scroll-snap-type: x mandatory;
 
+  // Hide scrollbar
+  scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -37,6 +44,30 @@
   scroll-snap-align: start;
 }
 
+.bonuses__bonus-card:nth-child(2) {
+  background: shared.$ui-gradient-green;
+}
+
+.bonuses__bonus-card:nth-child(3) {
+  background: shared.$ui-gradient-yellow-short;
+}
+
+.bonuses__header-bonus-card {
+  display: none;
+
+  & .bonuses__header {
+    margin: 0;
+    display: block;
+  }
+
+  @media (min-width: 1024px) {
+    display: block;
+    background: none;
+    width: 520px;
+  }
+}
+
+/* Left and right margins before the first card and after the last */
 .bonuses__list::before,
 .bonuses__list::after {
   content: "";
@@ -46,6 +77,8 @@
 
 .bonus-card__img {
   border-radius: 32px;
+  height: 215px;
+  object-fit: cover;
 }
 
 .bonus-card__desc {
