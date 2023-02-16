@@ -9,6 +9,7 @@ import "../styles/stackingCards.scss";
 import { StackingCardsManager } from "./stackingCards";
 import "../styles/tasks.scss";
 import "../styles/steps.scss";
+import "../styles/about.scss";
 
 
 // Stacking Cards component initialization
