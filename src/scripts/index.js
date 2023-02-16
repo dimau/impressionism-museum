@@ -5,3 +5,11 @@ import "../styles/index.scss";
 import "../styles/header.scss";
 import "../styles/promo.scss";
 import "../styles/bonuses.scss";
+import "../styles/stackingCards.scss";
+import { StackingCardsManager } from "./stackingCards";
+import "../styles/tasks.scss";
+import "../styles/steps.scss";
+
+
+// Stacking Cards component initialization
+const stackingCards = new StackingCardsManager(".stack-cards");

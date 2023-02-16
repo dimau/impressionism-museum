@@ -1,0 +1,27 @@
+@use "shared";
+
+.tasks {
+  margin-bottom: var(--section-margin-bottom);
+}
+
+.tasks__text-block {
+  position: sticky;
+  top: var(--section-margin-bottom);
+}
+
+.tasks__header {
+  @include shared.header(2);
+  margin-bottom: 12px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 16px;
+  }
+}
+
+.tasks__desc {
+  margin-bottom: 24px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 32px;
+  }
+}

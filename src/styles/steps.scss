@@ -1,0 +1,116 @@
+@use "shared";
+
+.steps {
+  margin-bottom: var(--section-margin-bottom);
+}
+
+.steps__header {
+  @include shared.header(2);
+  margin-bottom: 12px;
+}
+
+.steps__desc {
+  margin-bottom: 24px;
+}
+
+.steps__cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.steps__cards-first-row,
+.steps__cards-second-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 1440px) {
+    flex: 0 0 50%;
+  }
+}
+
+/* Styles for Card */
+
+.steps__card {
+  padding: 20px 24px;
+  background-color: shared.$ui-neutral-color;
+  border-radius: 32px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    flex: 0 0 50%;
+  }
+
+  @media (min-width: 1024px) {
+    height: 275px;
+  }
+}
+
+.steps__card-header {
+  @include shared.header(4);
+}
+
+.steps__card-desc {
+
+}
+
+/* Styles for indexes inside cards */
+
+.steps__card::after {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  background: shared.$ui-primary-color;
+  border-radius: 100%;
+  color: shared.$text-accent-red-color;
+}
+
+.steps__cards-first-row .steps__card:first-child::after {
+  content: "1";
+}
+
+.steps__cards-first-row .steps__card:nth-child(2)::after {
+  content: "2";
+}
+
+.steps__cards-second-row .steps__card:first-child::after {
+  content: "3";
+}
+
+.steps__cards-second-row .steps__card:nth-child(2)::after {
+  content: "";
+  background: url("../img/steps/check-icon.svg") no-repeat center shared.$ui-accent-red-color;
+
+}
+
+/* Special styles for the last card */
+.steps__cards-second-row .steps__card:last-child {
+  background: shared.$ui-gradient-red;
+}
+
+.steps__button {
+  @media (min-width: 768px) {
+    display: inline-block;
+  }
+}

@@ -57,7 +57,7 @@ $ui-gradient-red: radial-gradient(129.42% 103.14% at 50% -3.14%, #FFA8B2 0%, #FF
 
 @mixin text-body($size) {
   font-family: 'Inter', sans-serif;
-  color: $text-primary-color;
+  color: $text-secondary-color;
   line-height: 1.5;
   font-weight: 400;
   font-style: normal;
