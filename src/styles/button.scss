@@ -13,6 +13,7 @@
 
 .primary-button {
   @extend %button;
+  @include shared.button("primary");
   background: #221F1F;
   padding: 20px 40px;
   color: shared.$text-inverted-color;
@@ -34,6 +35,7 @@
 
 .secondary-button {
   @extend %button;
+  @include shared.button("secondary");
   background: transparent;
   padding: 12px 24px;
   border: 1px solid shared.$ui-border-color;

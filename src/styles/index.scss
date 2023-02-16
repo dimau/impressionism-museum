@@ -38,3 +38,17 @@ a, a:visited, a:active {
   color: shared.$ui-accent-blue-color;
   text-decoration: none;
 }
+
+input {
+  @include shared.text-body("m");
+  padding: 24px 32px;
+  background: shared.$ui-primary-color;
+  border-radius: 100px;
+  width: 100%;
+  border: 1px solid shared.$ui-primary-color;
+  color: shared.$text-placeholder-color;
+}
+
+input:active {
+  border: 1px solid shared.$ui-border-color;
+}

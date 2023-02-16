@@ -13,6 +13,7 @@ import "../styles/about.scss";
 import "../styles/accordion.scss";
 import { Accordion } from "./accordion";
 import "../styles/faq.scss";
+import "../styles/footer.scss";
 
 
 // Initialization Stacking Cards component
