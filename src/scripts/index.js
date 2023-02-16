@@ -10,7 +10,15 @@ import { StackingCardsManager } from "./stackingCards";
 import "../styles/tasks.scss";
 import "../styles/steps.scss";
 import "../styles/about.scss";
+import "../styles/accordion.scss";
+import { Accordion } from "./accordion";
+import "../styles/faq.scss";
 
 
-// Stacking Cards component initialization
-const stackingCards = new StackingCardsManager(".stack-cards");
+// Initialization Stacking Cards component
+new StackingCardsManager(".stack-cards");
+
+// Initialization Accordion component
+new Accordion(document.querySelector('.accordion'), {
+  alwaysOpen: false,
+});
