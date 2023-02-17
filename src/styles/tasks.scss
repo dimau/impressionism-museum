@@ -6,7 +6,7 @@
 
 .tasks__text-block {
   position: sticky;
-  top: var(--section-margin-bottom);
+  top: 20px;
 }
 
 .tasks__header {
@@ -24,4 +24,65 @@
   @media (min-width: 1024px) {
     margin-bottom: 32px;
   }
+}
+
+/*** Customization for Stacking Cards component ***/
+
+.stack-cards__item {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &:first-child {
+    background: shared.$ui-gradient-red;
+  }
+
+  &:nth-child(2) {
+    background: shared.$ui-gradient-yellow;
+  }
+
+  &:nth-child(3) {
+    background: shared.$ui-gradient-green;
+  }
+
+  &:nth-child(4) {
+    background: shared.$ui-gradient-red;
+  }
+
+  &:last-child {
+    background: shared.$ui-gradient-green;
+  }
+}
+
+.stack-cards__item-content-wrapper {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.stack-cards__text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stack-cards__title {
+  @include shared.header(3);
+}
+
+.stack-cards__coordinator {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stack-cards__desc {
+
+}
+
+.stack-cards__photo {
+  border-radius: 24px;
 }

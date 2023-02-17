@@ -1,18 +1,16 @@
 .stack-cards {
   /* Расстояние от верхнего края viewport, на котором будут застревать карточки на экране */
-  --stack-cards-top-margin: 305px;
+  --stack-cards-top-margin: 207px;
   /* Расстояние между карточками */
   --stack-cards-gap: 20px;
   /* Соотношение сторон карточки */
-  --stack-cards-item-ratio: 2/1;
-}
+  --stack-cards-item-ratio: 1/2;
 
-@media(min-width: 1024px) {
-  .stack-cards {
-    --stack-cards-top-margin: 300px;
+  @media(min-width: 1024px) {
     --stack-cards-gap: 50px;
   }
 }
+
 
 /* Стили отдельной карточки внутри компонента */
 .stack-cards__item {
@@ -24,14 +22,14 @@
 
   height: 0;
 
-  /* Резервирование места под картинку в карточке */
-  padding-bottom: calc(100% / (var(--stack-cards-item-ratio)) );
+  /* Резервирование места под контент в карточке */
+  padding-bottom: calc(100% / (var(--stack-cards-item-ratio)));
 
   transform-origin: center top;
   overflow: hidden;
 
   /* Опционально - для добавления тени под карточками */
-  box-shadow:0 0.9px 1.5px rgba(0, 0, 0, 0.03),0 3.1px 5.5px rgba(0, 0, 0, 0.08),0 14px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0.9px 1.5px rgba(0, 0, 0, 0.03), 0 3.1px 5.5px rgba(0, 0, 0, 0.08), 0 14px 25px rgba(0, 0, 0, 0.12);
   /* Опционально - для скругления углов у карточек */
   border-radius: 0.5em;
 }
