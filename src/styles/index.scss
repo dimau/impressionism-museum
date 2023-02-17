@@ -23,10 +23,14 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   @include shared.text-body("m");
   overflow-x: hidden;
+
 }
 
 .container {
@@ -34,7 +38,7 @@ body {
   margin-right: var(--section-margin-side);
 }
 
-a, a:visited, a:active {
+a {
   color: shared.$ui-accent-blue-color;
   text-decoration: none;
 }
