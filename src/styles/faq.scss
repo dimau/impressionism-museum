@@ -34,6 +34,18 @@
   grid-area: contacts;
 }
 
+.faq__telegram-string-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq__telegram-string-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .faq__coordinator {
   margin-top: 10px;
   display: flex;
