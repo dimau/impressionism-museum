@@ -51,6 +51,15 @@
 .nav__link {
   @include shared.text-body("s");
   text-decoration: none;
+  color: shared.$text-primary-color;
+
+  &:hover {
+    font-weight: 500;
+  }
+
+  &:active {
+    font-weight: 500;
+  }
 }
 
 .nav__button {
