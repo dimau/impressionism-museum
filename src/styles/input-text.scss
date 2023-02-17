@@ -1,0 +1,31 @@
+@use "shared";
+
+input {
+  @include shared.text-body("m");
+  padding: 24px 32px;
+  background: shared.$ui-primary-color;
+  border-radius: 100px;
+  width: 100%;
+  border: 1px solid shared.$ui-primary-color;
+  color: shared.$text-primary-color;
+  outline: none;
+}
+
+input:hover {
+  background: shared.$ui-neutral-color;
+  border-color: shared.$ui-neutral-color;
+}
+
+input:active, input:focus {
+  border: 1px solid shared.$ui-border-color;
+}
+
+input:disabled {
+  background: shared.$ui-neutral-color;
+  border-color: shared.$ui-neutral-color;
+  color: shared.$ui-border-color;
+}
+
+input::placeholder {
+  color: shared.$text-placeholder-color;
+}
