@@ -72,14 +72,14 @@
   margin-bottom: 12px;
   background: shared.$ui-neutral-color;
 
-  &:hover, &.accordion__item_show, &.accordion__item_slidedown {
-    background: shared.$ui-gradient-red;
-    outline: none;
-  }
-
   &:focus {
     background: shared.$ui-gradient-red;
     outline: 3px solid shared.$ui-inverted-color;
+  }
+
+  &:hover, &.accordion__item_show, &.accordion__item_slidedown {
+    background: shared.$ui-gradient-red;
+    outline: none;
   }
 }
 
