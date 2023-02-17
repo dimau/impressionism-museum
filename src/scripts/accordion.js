@@ -21,11 +21,21 @@ export class Accordion {
     this.addEventListener();
   }
 
-
   addEventListener() {
-    this._el.addEventListener("click", (e) => {
-      // Находим заголовок аккордеона, по которому был клик
-      const elHeader = e.target.closest(".accordion__header");
+    // Объявляем универсальную функцию для обработки как события клика, так и нажатия на Enter над компонентом
+    const handler = (event) => {
+      // Здесь будем хранить заголовок элемента аккордеона, над которым произошло событие
+      let elHeader;
+
+      // Обработчик должен уметь отрабатывать как клик/тап, так и нажатие Enter над элементом
+      if (event.keyCode) {     // Если это событие нажатия на клавишу клавиатуры
+        if (event.keyCode && event.keyCode !== 13) return;    // Над карточкой аккордеона нажали кнопку, но не Enter
+        elHeader = event.target.querySelector(".accordion__header"); // Находим соответствующий заголовок элемента аккордеона
+      } else { // Событие клика по заголовку
+        elHeader = event.target.closest(".accordion__header"); // Находим заголовок аккордеона, по которому был клик
+      }
+
+      // Не нашли заголовок - ничего не делаем
       if (!elHeader) return;
 
       // Если при открытии контента нужно закрывать предыдущий открытый пункт
@@ -38,7 +48,11 @@ export class Accordion {
 
       // Открываем или закрываем пункт, по которому кликнули
       this.toggle(elHeader.parentElement);
-    });
+    }
+
+    // Вешаем обработчик на события клика / нажатия на клавишу на компоненте
+    this._el.addEventListener("click", handler);
+    this._el.addEventListener("keydown", handler);
   }
 
   show(el) {
