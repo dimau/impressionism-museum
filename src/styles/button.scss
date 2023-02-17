@@ -7,29 +7,33 @@
   align-items: center;
   gap: 4px;
   border-radius: 100px;
+  outline: none;
   text-decoration: none;
   white-space: nowrap;
+  color: shared.$text-primary-color;
 }
 
 .primary-button {
   @extend %button;
   @include shared.button("primary");
-  background: #221F1F;
+  background: shared.$ui-inverted-color;
+  border: 3px solid shared.$ui-inverted-color;
   padding: 20px 40px;
   color: shared.$text-inverted-color;
 
   &:hover {
     background: shared.$ui-accent-red-color;
+    border-color: shared.$ui-accent-red-color;
   }
 
   &:active {
     background: shared.$ui-accent-dark-red-color;
+    border-color: shared.$ui-accent-dark-red-color;
   }
 
   &:focus {
     background: shared.$ui-accent-red-color;
     border: 3px solid shared.$ui-inverted-color;
-    padding: 17px 37px;
   }
 }
 
