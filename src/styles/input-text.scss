@@ -9,23 +9,24 @@ input {
   border: 1px solid shared.$ui-primary-color;
   color: shared.$text-primary-color;
   outline: none;
+
+  &:hover {
+    background: shared.$ui-neutral-color;
+    border-color: shared.$ui-neutral-color;
+  }
+
+  &:active, &:focus {
+    border: 1px solid shared.$ui-border-color;
+  }
+
+  &:disabled {
+    background: shared.$ui-neutral-color;
+    border-color: shared.$ui-neutral-color;
+    color: shared.$ui-border-color;
+  }
+
+  &::placeholder {
+    color: shared.$text-placeholder-color;
+  }
 }
 
-input:hover {
-  background: shared.$ui-neutral-color;
-  border-color: shared.$ui-neutral-color;
-}
-
-input:active, input:focus {
-  border: 1px solid shared.$ui-border-color;
-}
-
-input:disabled {
-  background: shared.$ui-neutral-color;
-  border-color: shared.$ui-neutral-color;
-  color: shared.$ui-border-color;
-}
-
-input::placeholder {
-  color: shared.$text-placeholder-color;
-}
