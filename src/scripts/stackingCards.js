@@ -1,19 +1,25 @@
-/***
- * Класс для инициализации и управления
- * одним или несколькими компонентами Stacking Cards на странице
- */
 export class StackingCardsManager {
   stackingCardsDOMElements = [];
   stackingCardsArray = [];
-  _customEvent = new CustomEvent("resize-stack-cards");
+  _customEvent = new CustomEvent("resize-all-stacking-cards");
 
-  constructor(elementsSelector = ".stack-cards") {
-    // Initialize list of all Stacking Cards DOM elements on the page
-    this.stackingCardsDOMElements = document.querySelectorAll(elementsSelector);
+  constructor(elementsSelector = ".stack-cards", options = {}) {
+    // Gather list of all Stacking Cards DOM elements on the page
+    if (typeof elementsSelector === "string") {
+      this.stackingCardsDOMElements =
+        document.querySelectorAll(elementsSelector);
+    } else if (elementsSelector instanceof HTMLElement) {
+      this.stackingCardsDOMElements = [elementsSelector];
+    } else {
+      console.warn("Can't find DOM elements for Stacking cards on the page");
+    }
+
+    // Check that current browser supports IntersectionObserver API
     const intersectionObserverSupported =
       "IntersectionObserver" in window &&
       "IntersectionObserverEntry" in window &&
       "intersectionRatio" in window.IntersectionObserverEntry.prototype;
+    // Check that user allows animations
     const reducedMotion = this.osHasReducedMotion();
 
     // If there are any Stacking Cards on the page and we have technical opportunity to add animation to them
@@ -23,16 +29,14 @@ export class StackingCardsManager {
       !reducedMotion
     ) {
       // Initialize all Stacking Cards components
-      this.stackingCardsArray = [];
       for (let i = 0; i < this.stackingCardsDOMElements.length; i++) {
         this.stackingCardsArray.push(
-          new StackingCards(this.stackingCardsDOMElements[i])
+          new StackingCards(this.stackingCardsDOMElements[i], options)
         );
       }
 
       // Handle resizing of the viewport
       let resizingId = false;
-
       window.addEventListener("resize", () => {
         if (resizingId) clearTimeout(resizingId);
         resizingId = setTimeout(() => this.doneResizing(), 500);
@@ -57,9 +61,6 @@ export class StackingCardsManager {
   }
 }
 
-/***
- * Класс компонента Stacking Cards
- */
 class StackingCards {
   element = null; // Corresponding DOM element for this Stacking Cards component
   items = []; // Array of corresponding DOM elements for all cards inside of the Stacking Cards component
@@ -75,9 +76,30 @@ class StackingCards {
   cardTop = 0; // Margin from the top of the viewport where the first card will be fixed
   cardHeight = 0; // Actual height of the first card
 
-  constructor(element) {
+  // For tracking moment when we should call callbacks
+  isFirstCardFixed = false;
+  isLastCardFixed = false;
+  callbackAfterFixingFirstCard = () => {};
+  callbackAfterFixingLastCard = () => {};
+  callbackAfterUnfixingLastCard = () => {};
+  callbackAfterUnfixingFirstCard = () => {};
+
+  constructor(element, options = {}) {
+    // Enrich options with default values
+    const defaultOptions = {
+      classForItems: "stack-cards__item", // Class name for items (cards) of this Stacking Cards component
+      callbackAfterFixingFirstCard: () => {}, // It's useful for fixing header of the section for example
+      callbackAfterFixingLastCard: () => {}, // It's useful for unfixing header of the section for example
+    };
+    options = Object.assign(defaultOptions, options);
+
     this.element = element;
-    this.items = this.element.getElementsByClassName("stack-cards__item");
+    this.items = this.element.getElementsByClassName(options.classForItems);
+    this.callbackAfterFixingFirstCard = options.callbackAfterFixingFirstCard;
+    this.callbackAfterFixingLastCard = options.callbackAfterFixingLastCard;
+    this.callbackAfterUnfixingFirstCard =
+      options.callbackAfterUnfixingFirstCard;
+    this.callbackAfterUnfixingLastCard = options.callbackAfterUnfixingLastCard;
     this.scrollingFn = false;
     this.scrolling = false;
     this.initStackCardsEffect();
@@ -99,7 +121,7 @@ class StackingCards {
 
   // Detect resize to reset gallery
   initStackCardsResize() {
-    this.element.addEventListener("resize-stack-cards", () => {
+    this.element.addEventListener("resize-all-stacking-cards", () => {
       this.setStackCards();
       this.animateStackCards();
     });
@@ -233,10 +255,48 @@ class StackingCards {
 
     // Changing properties of each card
     for (let i = 0; i < this.items.length; i++) {
+      // If the number is negative, it shows how many pixels are left before the position where this card should be fixed
+      // If the number is positive, it shows how many pixels the user scrolled the component after fixing this card
       let scrolling = this.cardTop - top - i * (this.cardHeight + this.marginY);
 
-      // For debugging purpose
-      // console.log({ i, scrolling, top, cardTop: this.cardTop });
+      // For debugging purposes
+      // if (i === 0)
+      //   console.log({
+      //     i,
+      //     scrolling,
+      //     top,
+      //     cardTop: this.cardTop,
+      //     isFirstCardFixed: this.isFirstCardFixed,
+      //   });
+
+      // When component becoming fixed in the viewport
+      if (i === 0 && scrolling >= 0 && this.isFirstCardFixed === false) {
+        this.isFirstCardFixed = true;
+        this.callbackAfterFixingFirstCard();
+      }
+
+      if (
+        i === this.items.length - 1 &&
+        scrolling >= -1 * i * this.marginY &&
+        this.isLastCardFixed === false
+      ) {
+        this.isLastCardFixed = true;
+        this.callbackAfterFixingLastCard();
+      }
+
+      if (
+        i === this.items.length - 1 &&
+        scrolling < -1 * i * this.marginY &&
+        this.isLastCardFixed === true
+      ) {
+        this.isLastCardFixed = false;
+        this.callbackAfterUnfixingLastCard();
+      }
+
+      if (i === 0 && scrolling < 0 && this.isFirstCardFixed === true) {
+        this.isFirstCardFixed = false;
+        this.callbackAfterUnfixingFirstCard();
+      }
 
       // Animation of scaling cards in the stack
       if (scrolling > 0) {
