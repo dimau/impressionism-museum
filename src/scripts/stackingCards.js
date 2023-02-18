@@ -132,6 +132,9 @@ class StackingCards {
   }
 
   setStackCards() {
+    // Automatically bring the height of all cards to the maximum value
+    this.normalizeCardsHeight();
+
     // store wrapper properties
     this.marginY = getComputedStyle(this.element).getPropertyValue(
       "--stack-cards-gap"
@@ -177,6 +180,29 @@ class StackingCards {
     this.element.appendChild(node);
     this.marginY = parseInt(getComputedStyle(node).getPropertyValue("height"));
     this.element.removeChild(node);
+  }
+
+  // Define maximum height among all cards and set this height to all of them
+  normalizeCardsHeight() {
+    // Clear previous height in inline styles if there is any
+    for (const item of this.items) {
+      item.style.height = "";
+    }
+
+    // Define the maximum height among all cards
+    let maxCardHeight = 0;
+    for (const item of this.items) {
+      const cardStyle = getComputedStyle(item);
+      const cardHeight = Math.floor(
+        parseFloat(cardStyle.getPropertyValue("height"))
+      );
+      maxCardHeight = Math.max(maxCardHeight, cardHeight);
+    }
+
+    // Set max height for all cards to normalize their height
+    for (const item of this.items) {
+      item.style.height = `${maxCardHeight}px`;
+    }
   }
 
   // Perform cards animation

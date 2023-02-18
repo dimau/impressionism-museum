@@ -3,8 +3,6 @@
   --stack-cards-top-margin: 207px;
   /* Расстояние между карточками */
   --stack-cards-gap: 20px;
-  /* Соотношение сторон карточки */
-  --stack-cards-item-ratio: 1/2;
 
   @media(min-width: 1024px) {
     --stack-cards-gap: 50px;
@@ -14,16 +12,13 @@
 
 /* Стили отдельной карточки внутри компонента */
 .stack-cards__item {
-  position: sticky;
+  // Align all cards in the center of component
+  margin: 0 auto;
 
   /* На каком расстоянии от верхнего края экрана (или позицинированного родителя) */
   /* должен залипать компонент при прокрутке страницы */
+  position: sticky;
   top: var(--stack-cards-top-margin);
-
-  height: 0;
-
-  /* Резервирование места под контент в карточке */
-  padding-bottom: calc(100% / (var(--stack-cards-item-ratio)));
 
   transform-origin: center top;
   overflow: hidden;
@@ -32,13 +27,4 @@
   box-shadow: 0 0.9px 1.5px rgba(0, 0, 0, 0.03), 0 3.1px 5.5px rgba(0, 0, 0, 0.08), 0 14px 25px rgba(0, 0, 0, 0.12);
   /* Опционально - для скругления углов у карточек */
   border-radius: 0.5em;
-}
-
-.stack-cards__item > * {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
