@@ -69,37 +69,22 @@ class StackingCards {
   windowHeight = 0; // Height of the window
 
   // Component wrapper properties
-  marginY = 0; // Distance between cards from "--stack-cards-gap"
+  marginY = 0; // Distance between cards inside stack from "--stack-cards-gap"
   elementHeight = 0; // Full actual height of the Stacking Cards component on the page
 
   // First card properties
   cardTop = 0; // Margin from the top of the viewport where the first card will be fixed
   cardHeight = 0; // Actual height of the first card
 
-  // For tracking moment when we should call callbacks
-  isFirstCardFixed = false;
-  isLastCardFixed = false;
-  callbackAfterFixingFirstCard = () => {};
-  callbackAfterFixingLastCard = () => {};
-  callbackAfterUnfixingLastCard = () => {};
-  callbackAfterUnfixingFirstCard = () => {};
-
   constructor(element, options = {}) {
     // Enrich options with default values
     const defaultOptions = {
       classForItems: "stack-cards__item", // Class name for items (cards) of this Stacking Cards component
-      callbackAfterFixingFirstCard: () => {}, // It's useful for fixing header of the section for example
-      callbackAfterFixingLastCard: () => {}, // It's useful for unfixing header of the section for example
     };
     options = Object.assign(defaultOptions, options);
 
     this.element = element;
     this.items = this.element.getElementsByClassName(options.classForItems);
-    this.callbackAfterFixingFirstCard = options.callbackAfterFixingFirstCard;
-    this.callbackAfterFixingLastCard = options.callbackAfterFixingLastCard;
-    this.callbackAfterUnfixingFirstCard =
-      options.callbackAfterUnfixingFirstCard;
-    this.callbackAfterUnfixingLastCard = options.callbackAfterUnfixingLastCard;
     this.scrollingFn = false;
     this.scrolling = false;
     this.initStackCardsEffect();
@@ -174,13 +159,12 @@ class StackingCards {
     // store window property
     this.windowHeight = window.innerHeight;
 
-    // reset margin + translate values
-    if (isNaN(this.marginY)) {
-      this.element.style.paddingBottom = "0px";
-    } else {
-      this.element.style.paddingBottom =
-        this.marginY * (this.items.length - 1) + "px";
-    }
+    // reset margin + translate values  TODO
+    // if (isNaN(this.marginY)) {
+    //   this.element.style.paddingBottom = "0px";
+    // } else {
+    //   this.element.style.paddingBottom = this.marginY * (this.items.length - 1) + "px";
+    // }
 
     // Shift cards from each other down by "this.marginY" pixels
     for (let i = 0; i < this.items.length; i++) {
@@ -255,9 +239,11 @@ class StackingCards {
 
     // Changing properties of each card
     for (let i = 0; i < this.items.length; i++) {
+      // scrolling == 0 when this card just achieved it's final top coordinate on the screen
       // If the number is negative, it shows how many pixels are left before the position where this card should be fixed
       // If the number is positive, it shows how many pixels the user scrolled the component after fixing this card
-      let scrolling = this.cardTop - top - i * (this.cardHeight + this.marginY);
+      // let scrolling = this.cardTop - top - i * (this.cardHeight + this.marginY); TODO
+      let scrolling = this.cardTop - top - i * (this.cardHeight + 200);
 
       // For debugging purposes
       // if (i === 0)
@@ -269,54 +255,24 @@ class StackingCards {
       //     isFirstCardFixed: this.isFirstCardFixed,
       //   });
 
-      // When component becoming fixed in the viewport
-      if (i === 0 && scrolling >= 0 && this.isFirstCardFixed === false) {
-        this.isFirstCardFixed = true;
-        this.callbackAfterFixingFirstCard();
-      }
-
-      if (
-        i === this.items.length - 1 &&
-        scrolling >= -1 * i * this.marginY &&
-        this.isLastCardFixed === false
-      ) {
-        this.isLastCardFixed = true;
-        this.callbackAfterFixingLastCard();
-      }
-
-      if (
-        i === this.items.length - 1 &&
-        scrolling < -1 * i * this.marginY &&
-        this.isLastCardFixed === true
-      ) {
-        this.isLastCardFixed = false;
-        this.callbackAfterUnfixingLastCard();
-      }
-
-      if (i === 0 && scrolling < 0 && this.isFirstCardFixed === true) {
-        this.isFirstCardFixed = false;
-        this.callbackAfterUnfixingFirstCard();
-      }
-
       // Animation of scaling cards in the stack
       if (scrolling > 0) {
         // If card is on it's final Y coordinate on the screen - scaling it
-        let scaling =
-          i === this.items.length - 1
-            ? 1
-            : (this.cardHeight - scrolling * 0.05) / this.cardHeight;
-        this.items[i].style.transform = `translateY(${
-          this.marginY * i
-        }px) scale(${scaling})`;
+        let scaling = (i === this.items.length - 1) ? 1 : (this.cardHeight - scrolling * 0.05) / this.cardHeight;
+        this.items[i].style.transform = `translateY(${ this.marginY * i }px) scale(${scaling})`;
       } else {
         // If card is NOT YET on the it's final Y coordinate on the screen
-        this.items[i].style.transform = `translateY(${this.marginY * i}px)`;
+        this.items[i].style.transform = `translateY(${ this.marginY * i }px)`;
       }
 
       // Animation of fade-in cards
-      // if (scrolling < -this.cardHeight) {
-      this.items[i].style.opacity = `${1 + scrolling / this.cardHeight}`;
-      // }
+      if (scrolling >= -this.cardHeight + this.marginY) {
+        this.items[i].style.opacity = "1";
+      } else if (scrolling < -this.cardHeight - 100) {
+        this.items[i].style.opacity = "0";
+      } else {
+        this.items[i].style.opacity = `${1 + (scrolling + this.cardHeight - this.marginY) / 100}`;
+      }
     }
 
     // The requested iteration of animation is done

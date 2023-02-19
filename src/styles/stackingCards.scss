@@ -3,6 +3,7 @@
   --stack-cards-top-margin: 207px;
   /* Расстояние между карточками */
   --stack-cards-gap: 20px;
+  padding-bottom: 1px;
 
   @media(min-width: 1024px) {
     --stack-cards-gap: 50px;
@@ -13,7 +14,7 @@
 /* Стили отдельной карточки внутри компонента */
 .stack-cards__item {
   // Align all cards in the center of component
-  margin: 0 auto;
+  margin: 0 auto 200px;
 
   /* На каком расстоянии от верхнего края экрана (или позицинированного родителя) */
   /* должен залипать компонент при прокрутке страницы */
