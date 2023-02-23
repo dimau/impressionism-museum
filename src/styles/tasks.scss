@@ -5,10 +5,13 @@
 }
 
 .tasks__text-block {
-  position: sticky;
-  top: 20px;
+  --top-fixation-margin: 20px; // distance from top of viewport where text block should be fixed
+  --margin-bottom: 24px;
+  margin-bottom: var(--margin-bottom);
 
-
+  @media (min-width: 1024px) {
+    --margin-bottom: 32px;
+  }
 }
 
 .tasks__header {
@@ -21,39 +24,43 @@
 }
 
 .tasks__desc {
-  margin-bottom: 24px;
 
-  @media (min-width: 1024px) {
-    margin-bottom: 32px;
-  }
 }
 
 /*** Customization for Stacking Cards component ***/
 
+.stack-cards {
+  padding-bottom: 1px;
+}
+
 .stack-cards__item {
+  --margin-inside-stack: 20px; // distance between cards when they are inside stack
   display: flex;
   flex-direction: column;
   gap: 24px;
   max-width: 500px;
+  margin-bottom: 150px;
+  opacity: 0;
 
-  &:first-child {
+  &.stack-cards__item-1 {
     background: shared.$ui-gradient-red;
   }
 
-  &:nth-child(2) {
+  &.stack-cards__item-2 {
     background: shared.$ui-gradient-yellow;
   }
 
-  &:nth-child(3) {
+  &.stack-cards__item-3 {
     background: shared.$ui-gradient-green;
   }
 
-  &:nth-child(4) {
+  &.stack-cards__item-4 {
     background: shared.$ui-gradient-red;
   }
 
-  &:last-child {
+  &.stack-cards__item-5 {
     background: shared.$ui-gradient-green;
+    margin-bottom: 0;
   }
 
   @media (min-width: 768px) {
