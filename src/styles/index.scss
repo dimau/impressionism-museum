@@ -24,7 +24,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  // Because of horizontally animated bonus cards
+  // and stacking cards with tasks scroll animated too
+  //scroll-behavior: smooth;
 }
 
 body {

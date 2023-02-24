@@ -17,6 +17,7 @@ import "../styles/footer.scss";
 // JS for components
 import "./stackingCards";
 import {Accordion} from "./accordion";
+import "./horizontalAnimatedScroll";
 
 // Initialization Accordion component
 new Accordion(document.querySelector(".accordion"), {
