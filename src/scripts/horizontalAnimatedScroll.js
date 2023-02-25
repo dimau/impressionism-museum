@@ -21,6 +21,7 @@ if (ScrollTrigger.isTouch !== 1) {
       pin: true,
       scrub: 0.1,
       fastScrollEnd: true,
+      invalidateOnRefresh: true,
     }
   });
 }

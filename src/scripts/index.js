@@ -19,6 +19,7 @@ import "./stackingCards";
 import {Accordion} from "./accordion";
 import "./horizontalAnimatedScroll";
 import "./emailSender";
+import "./headerAnimation";
 
 // Initialization Accordion component
 new Accordion(document.querySelector(".accordion"), {

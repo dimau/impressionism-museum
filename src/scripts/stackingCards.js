@@ -1,10 +1,11 @@
 function getParametersForCardsAndHeader() {
+
   // Get parameters of the Header of the Section with Cards
   const headerOfSectionWithCards = document.querySelector(".tasks__text-block");
   const computedStylesOfHeader = window.getComputedStyle(headerOfSectionWithCards);
   const textBlockHeight = headerOfSectionWithCards.offsetHeight;
   const textBlockMarginBottom = parseInt(computedStylesOfHeader.getPropertyValue("--margin-bottom"));
-  const textBlockFixationMargin = parseInt(computedStylesOfHeader.getPropertyValue("--top-fixation-margin"));
+  const textBlockFixationMargin = document.querySelector(".header").offsetHeight;
 
   // Get parameters of cards
   const allCards = document.querySelectorAll(".stack-cards__item");
@@ -21,7 +22,8 @@ gsap.registerPlugin(ScrollTrigger);
 // Initialize animations for each card
 const cards = gsap.utils.toArray(".stack-cards__item");
 cards.forEach((card, index) => {
-  // Animation of scaling
+
+  // Animation of scaling each card
   gsap.to(card, {
     scale: () => 1 - (cards.length - index) * 0.025,
     transformOrigin: "center top",
@@ -35,7 +37,7 @@ cards.forEach((card, index) => {
     },
   });
 
-  // Fade-in animation for cards
+  // Fade-in animation for each card
   gsap.to(card, {
     opacity: 1,
     scrollTrigger: {
@@ -78,7 +80,10 @@ cards.forEach((card, index) => {
 // Fixation for Header of the section with cards
 ScrollTrigger.create({
   trigger: ".tasks__text-block",
-  start: () => `top ${20}px`,
+  start: () => {
+    const {textBlockFixationMargin} = getParametersForCardsAndHeader();
+    return `top ${textBlockFixationMargin}px`;
+  },
   // Exactly the same values of endTrigger and end as the animation of fixing cards in the stack so that they undock and leave synchronously
   endTrigger: () => {
     const allCards = document.querySelectorAll(".stack-cards__item");

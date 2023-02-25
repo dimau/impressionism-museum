@@ -1,8 +1,12 @@
 @use "shared";
 
 .header {
-  margin-bottom: 28px;
-  padding-top: 12px;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .nav {
