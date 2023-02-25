@@ -1,21 +1,16 @@
-function getParametersForCardsAndHeader() {
+// Parameters of the Header of the Section with Cards
+const headerOfSectionWithCards = document.querySelector(".tasks__text-block");
+let computedStylesOfHeader;
+let textBlockHeight;
+let textBlockMarginBottom;
+let textBlockFixationMargin;
 
-  // Get parameters of the Header of the Section with Cards
-  const headerOfSectionWithCards = document.querySelector(".tasks__text-block");
-  const computedStylesOfHeader = window.getComputedStyle(headerOfSectionWithCards);
-  const textBlockHeight = headerOfSectionWithCards.offsetHeight;
-  const textBlockMarginBottom = parseInt(computedStylesOfHeader.getPropertyValue("--margin-bottom"));
-  const textBlockFixationMargin = document.querySelector(".header").offsetHeight;
-
-  // Get parameters of cards
-  const allCards = document.querySelectorAll(".stack-cards__item");
-  const computedStylesOfCard = window.getComputedStyle(allCards[0]);
-  const marginBetweenCardsInsideStack = parseInt(computedStylesOfCard.getPropertyValue("--margin-inside-stack"));
-  const amountOfCards = allCards.length;
-  const cardHeight = parseInt(computedStylesOfCard.height);
-
-  return {textBlockHeight, textBlockMarginBottom, textBlockFixationMargin, marginBetweenCardsInsideStack, amountOfCards, cardHeight};
-}
+// Parameters of cards
+const allCards = document.querySelectorAll(".stack-cards__item");
+const amountOfCards = allCards.length;
+let computedStylesOfCard;
+let marginBetweenCardsInsideStack;
+let cardHeight;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,10 +39,7 @@ cards.forEach((card, index) => {
       trigger: card,
       start: () => `top bottom-=50`,
       // The card must be completely opaque by the time it is attached to the deck
-      end: () => {
-        const {textBlockHeight, textBlockMarginBottom, textBlockFixationMargin, marginBetweenCardsInsideStack, cardHeight} = getParametersForCardsAndHeader();
-        return `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + cardHeight + marginBetweenCardsInsideStack * index}px`;
-      },
+      end: () => `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + cardHeight + marginBetweenCardsInsideStack * index}px`,
       scrub: true,
       invalidateOnRefresh: true
     },
@@ -57,20 +49,11 @@ cards.forEach((card, index) => {
   ScrollTrigger.create({
     trigger: card,
     // Fix each card on an individual edge inside Viewport - when its top reaches the desired indent under the section heading
-    start: () => {
-      const {textBlockHeight, textBlockMarginBottom, textBlockFixationMargin, marginBetweenCardsInsideStack} = getParametersForCardsAndHeader();
-      return `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * index}px`;
-    },
+    start: () => `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * index}px`,
     // We will use the last card in the set as the end trigger
-    endTrigger: () => {
-      const allCards = document.querySelectorAll(".stack-cards__item");
-      return allCards[allCards.length - 1];
-    },
+    endTrigger: () => allCards[allCards.length - 1],
     // Touching the top of the last card from the set of it's fixation edge in the Viewport will also be the end the fixation moment for ALL cards in the deck
-    end: () => {
-      const {textBlockHeight, textBlockMarginBottom, textBlockFixationMargin, marginBetweenCardsInsideStack, amountOfCards} = getParametersForCardsAndHeader();
-      return `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * (amountOfCards - 1)}px`;
-    },
+    end: () => `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * (amountOfCards - 1)}px`,
     pin: true,
     pinSpacing: false,
     invalidateOnRefresh: true,
@@ -80,21 +63,28 @@ cards.forEach((card, index) => {
 // Fixation for Header of the section with cards
 ScrollTrigger.create({
   trigger: ".tasks__text-block",
-  start: () => {
-    const {textBlockFixationMargin} = getParametersForCardsAndHeader();
-    return `top ${textBlockFixationMargin}px`;
-  },
+  start: () => `top ${textBlockFixationMargin}px`,
   // Exactly the same values of endTrigger and end as the animation of fixing cards in the stack so that they undock and leave synchronously
-  endTrigger: () => {
-    const allCards = document.querySelectorAll(".stack-cards__item");
-    return allCards[allCards.length - 1];
-  },
+  endTrigger: () => allCards[allCards.length - 1],
   // Touching the top of the last card from the set of it's fixation edge in the Viewport will also be the end the fixation moment for ALL cards in the deck
-  end: () => {
-    const {textBlockHeight, textBlockMarginBottom, textBlockFixationMargin, marginBetweenCardsInsideStack, amountOfCards} = getParametersForCardsAndHeader();
-    return `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * (amountOfCards - 1)}px`;
-  },
+  end: () => `top ${textBlockHeight + textBlockMarginBottom + textBlockFixationMargin + marginBetweenCardsInsideStack * (amountOfCards - 1)}px`,
   pin: true,
   pinSpacing: false,
   invalidateOnRefresh: true,
+});
+
+// Optimized recalculation all values that are used in several "start" and "end" fields
+// Will be automatically called each time on refresh event (for example when viewport is resized)
+ScrollTrigger.addEventListener("refreshInit", () => {
+
+  // Get parameters of the Header of the Section with Cards
+  computedStylesOfHeader = window.getComputedStyle(headerOfSectionWithCards);
+  textBlockHeight = headerOfSectionWithCards.offsetHeight;
+  textBlockMarginBottom = parseInt(computedStylesOfHeader.getPropertyValue("--margin-bottom"));
+  textBlockFixationMargin = document.querySelector(".header").offsetHeight;
+
+  // Get parameters of cards
+  computedStylesOfCard = window.getComputedStyle(allCards[0]);
+  marginBetweenCardsInsideStack = parseInt(computedStylesOfCard.getPropertyValue("--margin-inside-stack"));
+  cardHeight = parseInt(computedStylesOfCard.height);
 });
