@@ -20,6 +20,7 @@ import {Accordion} from "./accordion";
 import "./horizontalAnimatedScroll";
 import "./emailSender";
 import "./headerAnimation";
+import "./pageScrollToAnimations";
 
 // Initialization Accordion component
 new Accordion(document.querySelector(".accordion"), {

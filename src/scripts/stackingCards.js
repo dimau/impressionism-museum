@@ -61,7 +61,7 @@ cards.forEach((card, index) => {
 });
 
 // Fixation for Header of the section with cards
-ScrollTrigger.create({
+export const tasksSectionHeaderAnimation = ScrollTrigger.create({
   trigger: ".tasks__text-block",
   start: () => `top ${textBlockFixationMargin}px`,
   // Exactly the same values of endTrigger and end as the animation of fixing cards in the stack so that they undock and leave synchronously
