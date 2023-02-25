@@ -33,7 +33,7 @@ function submitHandler() {
   };
 
   const subject = "Новое обращение с сайта"
-  const message = document.querySelector("#" + formId + " [type='text']").value;
+  const message = formElem.querySelector(".footer__input").value;
   data['subject'] = subject;
   data['text'] = message;
   const params = toParams(data);
