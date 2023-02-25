@@ -40,6 +40,7 @@
   max-width: 500px;
   margin-bottom: 150px;
   opacity: 0;
+  border-radius: 32px;
 
   &.stack-cards__item-1 {
     background: shared.$ui-gradient-red;
@@ -87,6 +88,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding: 0 16px;
 }
 
 .stack-cards__title {
