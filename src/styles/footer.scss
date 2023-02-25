@@ -77,6 +77,47 @@
   }
 }
 
+.footer__form-button-loader {
+  display: none;
+}
+
+.footer__one-more-button {
+  display: none;
+}
+
+.footer__form-success-message {
+  display: none;
+  gap: 12px;
+  color: shared.$text-primary-color;
+
+  &::before {
+    content: "";
+    background: url("../img/footer/success-icon.svg");
+    flex-basis: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 14px;
+    margin-top: 7px;
+  }
+}
+
+.footer__form-fail-message {
+  display: none;
+  gap: 12px;
+  align-items: flex-start;
+  color: shared.$text-accent-red-color;
+
+  &::before {
+    content: "";
+    background: url("../img/footer/fail-icon.svg");
+    flex-basis: 14px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 14px;
+    margin-top: 7px;
+  }
+}
+
 .footer__bottom {
   display: flex;
   justify-content: space-between;

@@ -432,10 +432,16 @@
                         Оставь контакт, и мы свяжемся в течение 2–3 дней
                     </label>
                 </div>
-                <form class="footer__form" action="">
+                <form class="footer__form" id="footer__form" action="">
                     <input class="footer__input" id="contact" type="text"
                            placeholder="Телефон / почта / ник в телеграм">
-                    <button type="submit" class="footer__button primary-button">Отправить</button>
+                    <p class="footer__form-success-message">Спасибо за отклик! Мы свяжемся в течение 2–3 дней</p>
+                    <button type="submit" class="footer__button primary-button">
+                        <span class="footer__form-button-default-text">Отправить</span>
+                        <img class="footer__form-button-loader" src="img/footer/loader.svg" alt="Иконка выполняющейся отправки">
+                    </button>
+                    <button class="footer__one-more-button primary-button">Отправить ещё один контакт</button>
+                    <p class="footer__form-fail-message">Что-то пошло не так.  Проверь подключение к интернету и попробуй ещё раз</p>
                 </form>
             </div>
 

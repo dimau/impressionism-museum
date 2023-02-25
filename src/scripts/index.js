@@ -18,6 +18,7 @@ import "../styles/footer.scss";
 import "./stackingCards";
 import {Accordion} from "./accordion";
 import "./horizontalAnimatedScroll";
+import "./emailSender";
 
 // Initialization Accordion component
 new Accordion(document.querySelector(".accordion"), {
