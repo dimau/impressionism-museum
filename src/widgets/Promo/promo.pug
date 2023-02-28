@@ -1,0 +1,13 @@
+section.promo
+    .container
+        .promo__inner
+            h1.promo__header Ищем волонтёров с любовью к искусству
+            .promo__picture-wrapper
+                picture.promo__picture
+                    source.promo__img(media="(min-width: 768px)" srcset=require("./img/promo-full.jpg"))
+                    source.promo__img(media="(min-width: 360px)" srcset=require("./img/promo-768.jpg"))
+                    img.promo__img(src=require("./img/promo-360.jpg") alt="Здание музея")
+            .promo__call-to-action
+                img.promo__avatars(src=require("./img/avatars.png") alt="Фотографии участников")
+                .promo__text Стань частью команды Музея русского импрессионизма в Москве
+            a.promo__button.primary-button(href="#footer") Присоединиться

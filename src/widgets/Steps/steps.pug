@@ -1,0 +1,12 @@
+mixin stepCard(header, desc)
+    .steps__card
+        h3.steps__card-header= header
+        .steps__card-desc= desc
+
+section.steps
+    .container
+        h2.steps__header Опыт не важен
+        .steps__desc Всему научим и поможем подобрать задания по душе
+        .steps__cards-wrapper
+            .steps__cards-first-row
+                +stepCard("Обучение", "Основы маркетинга, .... пожарная безопасность")
