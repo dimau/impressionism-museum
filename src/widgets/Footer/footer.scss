@@ -1,4 +1,4 @@
-@use "shared";
+@use "../../app/styles/shared";
 
 .footer {
   padding: 24px 0;
@@ -92,7 +92,7 @@
 
   &::before {
     content: "";
-    background: url("../img/footer/success-icon.svg");
+    background: url("./img/success-icon.svg");
     flex-basis: 20px;
     flex-shrink: 0;
     flex-grow: 0;
@@ -109,7 +109,7 @@
 
   &::before {
     content: "";
-    background: url("../img/footer/fail-icon.svg");
+    background: url("./img/fail-icon.svg");
     flex-basis: 14px;
     flex-shrink: 0;
     flex-grow: 0;

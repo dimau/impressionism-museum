@@ -1,0 +1,17 @@
+footer#footer.footer
+    .container
+        .footer__main-wrapper
+            .footer__text-block
+                h2.footer__header Стать волонтёром в музее
+                label.footer__desc(for="contact") Оставь контакт, и мы свяжемся в течение 2–3 дней
+            form#footer__form.footer__form(action="")
+                input#contact.footer__input(type="text" placeholder="Телефон / почта / ник в телеграм")
+                p.footer__form-success-message Спасибо за отклик! Мы свяжемся в течение 2–3 дней
+                button.footer__button.primary-button(type="submit")
+                    span.footer__form-button-default-text Отправить
+                    img.footer__form-button-loader(src=require("./img/loader.svg") alt="Иконка выполняющейся отправки")
+                button.footer__one-more-button.primary-button Отправить ещё один контакт
+                p.footer__form-fail-message Что-то пошло не так.  Проверь подключение к интернету и попробуй ещё раз
+        .footer__bottom
+            span Музей русского импрессионизма
+            span (с)&nbsp2023

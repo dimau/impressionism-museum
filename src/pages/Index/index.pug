@@ -1,0 +1,15 @@
+extends ../../layouts/Main/main
+
+block styles
+    link(href=require('./index.scss') rel='stylesheet')
+
+block scripts
+    script(defer='defer' src=require('./index.js'))
+
+block content
+    include ../../widgets/Promo/promo
+    include ../../widgets/Bonuses/bonuses
+    include ../../widgets/Tasks/tasks
+    include ../../widgets/Steps/steps
+    include ../../widgets/About/about
+    include ../../widgets/Faq/faq

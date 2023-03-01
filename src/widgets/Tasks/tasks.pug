@@ -1,28 +1,22 @@
+- var stackingCards = [{title: "Входная группа", avatarImg: "../Faq/img/avatar.png", avatarAlt: "Фотография координатора волонтерских программ", coordinator: "Куратор Вера Рябинина", desc: "Встреча гостей при входе, рассказ о музее, выставках и мероприятиях, помощь администраторам на стойке информации. При необходимости помощь в гардеробе.", photoImg: "./img/pic-1.jpg", photoAlt: "Входная группа в музее", uniqueClass: "stack-cards__item-1"}, {title: "Просвещение", avatarImg: "../Faq/img/avatar.png", avatarAlt: "Фотография координатора волонтерских программ", coordinator: "Кураторы Виктория Ровнова, Любовь Чиркина", desc: "Просветительская деятельность музея подразумевает как работу с посетителями самых разных групп и категорий, так и длительный этап подготовки и апробации образовательных продуктов. Волонтеры помогают организовывать и проводить специальные мероприятия, в том числе детские и инклюзивные.", photoImg: "./img/pic-2.jpg", photoAlt: "Групповое занятие с детьми", uniqueClass: "stack-cards__item-2"}, {title: "Подготовка выставок", avatarImg: "../Faq/img/avatar.png", avatarAlt: "Фотография координатора волонтерских программ", coordinator: "Кураторы Елена Ахмерова, Дарья Урядова", desc: "Первичный поиск информации, работа с музейными каталогами и архивами, оформление выставочных залов.", photoImg: "./img/pic-3.jpg", photoAlt: "Выставочный зал с картинами", uniqueClass: "stack-cards__item-3"}, {title: "Маркетинг и продвижение", avatarImg: "../Faq/img/avatar.png", avatarAlt: "Фотография координатора волонтерских программ", coordinator: "Кураторы Вера Афанасьева, Мария Григорьева", desc: "Работа со СМИ и соцсетями — мониторинг, рассылки, создание креативных проектов — примеры, помощь в подготовке мероприятий, их фото- и видеосъемка, опросы посетителей, аналитика данных.", photoImg: "./img/pic-4.jpg", photoAlt: "Выставка картин", uniqueClass: "stack-cards__item-4"}, {title: "Спецпроекты", avatarImg: "../Faq/img/avatar.png", avatarAlt: "Фотография координатора волонтерских программ", coordinator: "Куратор Елена Озоль", desc: "Помощь в организации вернисажей, концертов, перформансов, театрализованных постановок, авторских экскурсий, вечеров встреч.", photoImg: "./img/pic-5.jpg", photoAlt: "Зал для выступлений", uniqueClass: "stack-cards__item-5"}]
+
+mixin stackCard(title, avatarImg, avatarAlt, coordinator, desc, photoImg, photoAlt, uniqueClass)
+    li.stack-cards__item(class= uniqueClass)
+        .stack-cards__item-content-wrapper
+            .stack-cards__text-block
+                h3.stack-cards__title= title
+                .stack-cards__coordinator
+                    img.stack-cards__avatar(src=require(avatarImg) alt=avatarAlt)
+                    .stack-cards__coordinator-text= coordinator
+                .stack-cards__desc= desc
+            .stack-cards__photo-wrapper
+                img.stack-cards__photo(src=require(photoImg) alt=photoAlt)
+
 section#tasks.tasks
     .container
         .tasks__text-block
             h2.tasks__header Задания для волонтёров
             p.tasks__desc Можно помогать разным отделам музея, офлайн или удалённо.
         ul.stack-cards
-
-            li.stack-cards__item.stack-cards__item-1
-                .stack-cards__item-content-wrapper
-                    .stack-cards__text-block
-                        h3.stack-cards__title Входная группа
-                        .stack-cards__coordinator
-                            img.stack-cards__avatar(src=require("../../img/faq/avatar.png") alt="Фотография координатора волонтерских программ")
-                            .stack-cards__coordinator-text Куратор Вера Рябинина
-                        .stack-cards__desc Встреча гостей при входе, рассказ о музее, выставках и мероприятиях, помощь администраторам на стойке информации. При необходимости помощь в гардеробе.
-                    .stack-cards__photo-wrapper
-                        img.stack-cards__photo(src=require("./img/pic-1.jpg") alt="Входная группа в музее")
-
-            li.stack-cards__item.stack-cards__item-2
-                .stack-cards__item-content-wrapper
-                    .stack-cards__text-block
-                        h3.stack-cards__title Просвещение
-                        .stack-cards__coordinator
-                            img.stack-cards__avatar(src=require("../../img/faq/avatar.png") alt="Фотография координатора волонтерских программ")
-                            .stack-cards__coordinator-text Кураторы Виктория Ровнова, Любовь Чиркина
-                        .stack-cards__desc Просветительская деятельность музея подразумевает как работу с посетителями самых разных групп и категорий, так и длительный этап подготовки и апробации образовательных продуктов. Волонтеры помогают организовывать и проводить специальные мероприятия, в том числе детские и инклюзивные.
-                    .stack-cards__photo-wrapper
-                        img.stack-cards__photo(src=require("./img/pic-2.jpg") alt="Групповое занятие с детьми")
+            for card in stackingCards
+                +stackCard(card.title, card.avatarImg, card.avatarAlt, card.coordinator, card.desc, card.photoImg, card.photoAlt, card.uniqueClass)

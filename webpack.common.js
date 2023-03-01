@@ -1,20 +1,22 @@
-const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const PugPlugin = require('pug-plugin');
 const fs = require("fs");
 
-// Get all file names from directory with pages
+// Dynamically get all templates for pages
 const PAGES_DIR = path.join(__dirname, "src", "pages");
-const pages = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith(".pug"));
+const pages = fs.readdirSync(PAGES_DIR);
+const entry = pages.reduce((acc, pageName) => {
+  acc[pageName.toLowerCase()] = path.join(PAGES_DIR, pageName, `${pageName.toLowerCase()}.pug`);
+  return acc;
+}, {});
 
 const config = {
-  entry: "./src/scripts/index.js",
+  entry: entry,
 
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.[contenthash].js",
+    path: path.join(__dirname, "dist"),
+    filename: 'assets/js/[name].[contenthash:8].js',
     clean: true,
   },
 
@@ -28,7 +30,6 @@ const config = {
       {
         test: /\.(scss|css)$/,
         use: [
-          MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "sass-loader",
@@ -37,29 +38,30 @@ const config = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
+        generator: {
+          filename: 'assets/img/[name].[hash:8][ext]'
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext][query]'
+        }
       },
       {
         test: /\.pug$/i,
-        use: "pug-loader",
+        loader: PugPlugin.loader,
       },
     ],
   },
 
   plugins: [
-    // Automatic creation all web pages
-    ...pages.map(page => new HtmlWebpackPlugin({
-      template: path.join(PAGES_DIR, page),
-      filename: page.replace(/\.pug$/, ".html"),
-    })),
-
-    // Copy images from src to dist
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "src", "img"),
-          to: path.resolve(__dirname, "dist", "img"),
-        },
-      ],
+    // Generating html pages based on pug templates
+    new PugPlugin({
+      css: {
+        filename: 'assets/css/[name].[contenthash:8].css'
+      }
     }),
 
     // Copy robots.txt file from src to dist
@@ -70,11 +72,6 @@ const config = {
           to: path.resolve(__dirname, "dist", "robots.txt"),
         },
       ],
-    }),
-
-    // Gathering and minification of CSS file
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
     }),
   ],
 };

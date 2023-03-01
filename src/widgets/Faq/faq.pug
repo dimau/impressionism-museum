@@ -1,0 +1,27 @@
+mixin accrodionItem(header, content)
+    .accordion__item(tabindex="0")
+        .accordion__header= header
+        .accordion__body
+            .accordion__content= content
+
+section#faq.faq
+    .container
+        .faq__inner
+            h2.faq__header Частые вопросы
+            .accordion
+                +accrodionItem("Сколько часов в неделю нужно волонтёрить?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos a autem perspiciatis sit eumexercitationem expedita omnis ipsam voluptate veritatis dolores similique eligendi, earum quasi officia facilis dolorum!")
+                +accrodionItem("Могу ли быть волонтёром, если ещё учусь в школе?", "Да, конечно. Волонтёром можно стать с 12 лет, потребуется согласие родителей.")
+                +accrodionItem("Пишете ли часы в книжку волонтёра?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos a autem perspiciatis sit eumexercitationem expedita omnis ipsam voluptate veritatis dolores similique eligendi, earum quasi officia facilis dolorum!")
+                +accrodionItem("А как ещё можно помочь музею, кроме волонтёрства?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos a autem perspiciatis sit eumexercitationem expedita omnis ipsam voluptate veritatis dolores similique eligendi, earum quasi officia facilis dolorum!")
+            .faq__additional-contacts
+                p Не нашли ответ?
+                p Звоните
+                    a(href="tel:89197255338") +7 919 725 53 38
+                p пишите на почту
+                    a(href="mailto:riabinina@rusimp.org") riabinina@rusimp.org
+                p.faq__telegram-string-wrapper или в
+                    a.faq__telegram-string-link(href="#") #[img(src=require("./img/telegram-icon.svg") alt="Значок телеграмм")] телеграмм
+                .faq__coordinator
+                    img.faq__avatar(src=require("./img/avatar.png") alt="Фотография координатора волонтерских программ")
+                    .faq__coordinator-text Координатор волонтерской программы Вера Рябинина
+

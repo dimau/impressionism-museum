@@ -1,4 +1,4 @@
-@use "shared";
+@use "../../app/styles/shared";
 
 .steps {
   margin-bottom: var(--section-margin-bottom);
@@ -100,7 +100,7 @@
 
 .steps__cards-second-row .steps__card:nth-child(2)::after {
   content: "";
-  background: url("../img/steps/check-icon.svg") no-repeat center shared.$ui-accent-red-color;
+  background: url("img/check-icon.svg") no-repeat center shared.$ui-accent-red-color;
 
 }
 

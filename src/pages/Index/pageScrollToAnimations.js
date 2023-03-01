@@ -1,5 +1,5 @@
-import {bonusCardsAnimation} from "./horizontalAnimatedScroll";
-import {tasksSectionHeaderAnimation} from "./stackingCards";
+import {bonusCardsAnimation} from "../../widgets/Bonuses/horizontalAnimatedScroll";
+import {tasksSectionHeaderAnimation} from "../../shared/ui/StackingCards/stackingCards";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
