@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger);
+
 export let bonusCardsAnimation;
 
 // Animated horizontal scrolling for bonuses is working only not on touch devices
@@ -15,7 +17,7 @@ if (ScrollTrigger.isTouch !== 1) {
 
   bonusCardsAnimation = ScrollTrigger.create({
     animation: gsap.to(bonusCards, {
-      x: -(container.scrollWidth - document.documentElement.clientWidth),
+      x: () => -(container.scrollWidth - document.documentElement.clientWidth),
       ease: "none",
     }),
     trigger: ".bonuses__list",

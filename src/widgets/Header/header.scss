@@ -2,11 +2,16 @@
 
 .header {
   margin-bottom: 16px;
-  padding: 12px 0;
-  background: rgba(255, 255, 255, 0);
-  position: sticky;
+  height: 117px;  /* Space-holder with the fixed max height of the header */
+}
+
+.header__wrapper {
+  position: fixed;
   top: 0;
   z-index: 10;
+  width: 100%;
+  background: rgba(255, 255, 255, 0);
+  padding: 12px 0;
 }
 
 .nav {

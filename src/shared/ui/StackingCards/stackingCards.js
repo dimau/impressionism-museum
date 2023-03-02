@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger);
+
 // Parameters of the Header of the Section with Cards
 const headerOfSectionWithCards = document.querySelector(".tasks__text-block");
 let computedStylesOfHeader;
@@ -11,8 +13,6 @@ const amountOfCards = allCards.length;
 let computedStylesOfCard;
 let marginBetweenCardsInsideStack;
 let cardHeight;
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Initialize animations for each card
 const cards = gsap.utils.toArray(".stack-cards__item");
