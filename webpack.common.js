@@ -1,7 +1,7 @@
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const PugPlugin = require('pug-plugin');
 const fs = require("fs");
+const PugPlugin = require('pug-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // Dynamically get all templates for pages
 const PAGES_DIR = path.join(__dirname, "src", "pages");
@@ -57,7 +57,7 @@ const config = {
   },
 
   plugins: [
-    // Generating html pages based on pug templates
+    // Generating html pages based on pug templates as entry points for Webpack
     new PugPlugin({
       css: {
         filename: 'assets/css/[name].[contenthash:8].css'
